@@ -15,7 +15,7 @@ namespace AdventOfCode2021.Day1
     {
         protected override string RunPuzzle()
         {
-            var depths = ReadInputDataAsIntegerArray();
+            var depths = ReadInputDataAsIntegerArray("Day1");
             var increaseCount = CalculateIncreaseCount(depths);
             return $"The measurement increased {increaseCount} times";
         }

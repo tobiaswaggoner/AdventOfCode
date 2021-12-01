@@ -20,15 +20,29 @@ namespace AdventOfCode2021
 
         protected abstract string RunPuzzle();
 
-        protected static List<string> ReadInputDataAsStringArray()
+        protected static List<string> ReadInputDataAsCommaSeparatedStringArray(string dir)
         {
             return File
-                .ReadAllLines( Path.Combine("Day1", "PuzzleInput.txt"))
+                .ReadAllText( Path.Combine(dir, "PuzzleInput.txt"))
+                .Split(",")
+                .Select( t => t.Trim())
                 .ToList();
         }
-        protected static List<int> ReadInputDataAsIntegerArray()
+        protected static List<string> ReadInputDataAsStringArray(string dir)
         {
-            return ReadInputDataAsStringArray()
+            return File
+                .ReadAllLines( Path.Combine(dir, "PuzzleInput.txt"))
+                .ToList();
+        }
+        protected static List<int> ReadInputDataAsIntegerArray(string dir)
+        {
+            return ReadInputDataAsStringArray(dir)
+                .Select(int.Parse)
+                .ToList();
+        }
+        protected static List<int> ReadInputDataAsCommaSeparatedIntegerArray(string dir)
+        {
+            return ReadInputDataAsCommaSeparatedStringArray(dir)
                 .Select(int.Parse)
                 .ToList();
         }

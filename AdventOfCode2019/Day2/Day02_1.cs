@@ -5,28 +5,25 @@
 #region Using
 
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Immutable;
 using AdventOfCode2021;
 
 #endregion
 
-namespace AdventOfCode2020.Day1
+namespace AdventOfCode2019.Day2
 {
-    public class Day01_1 : PuzzleBase
+    public class Day02_1 : PuzzleBase
     {
         protected override string RunPuzzle()
         {
-            var input = ReadInputDataAsIntegerArray("Day1");
+            var input = ReadInputDataAsCommaSeparatedIntegerArray("Day2");
             var result = CalculateResult(input);
             return $"Result: {result}";
         }
 
-        private static int CalculateResult(IReadOnlyList<int> input)
+        private static int CalculateResult(IEnumerable<int> input)
         {
-            return input
-                .SelectMany(a => input.Select(b => new { a, b, sum = a + b, product = a * b }))
-                .First(result => result.sum == 2020)
-                .product;
+            return Computer.ExecuteProgram(input.ToImmutableList(), 12, 2);
         }
     }
 }

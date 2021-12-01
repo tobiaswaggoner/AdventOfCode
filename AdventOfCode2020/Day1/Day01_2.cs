@@ -16,7 +16,7 @@ namespace AdventOfCode2020.Day1
     {
         protected override string RunPuzzle()
         {
-            var input = ReadInputDataAsIntegerArray();
+            var input = ReadInputDataAsIntegerArray("Day1");
             var result = CalculateResult(input);
             return $"Result: {result}";
         }
