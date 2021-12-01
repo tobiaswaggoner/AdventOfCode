@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AdventOfCode2021.Day1
 {
-    public class Day01_2_GroupedSonarSweep : PuzzleBase
+    public class Day01_1 : PuzzleBase
     {
         protected override string RunPuzzle()
         {
@@ -22,20 +22,10 @@ namespace AdventOfCode2021.Day1
 
         private static int CalculateIncreaseCount(IReadOnlyList<int> depths)
         {
-            var slidingWindows = depths
-                .Select((next, index) =>
-                    next
-                    + (index == 0 ? 0 : depths[index - 1])
-                    + (index == depths.Count - 1 ? 0 : depths[index + 1])
-                )
-                .Skip(1)
-                .Take(depths.Count - 2)
-                .ToList();
-
-            var increaseCount = slidingWindows
+            var increaseCount = depths
                 .Skip(1)
                 .Aggregate(
-                    new Summary(0, slidingWindows[0]),
+                    new Summary(0, depths[0]),
                     (result, next) => result with
                     {
                         IncreaseCount = next > result.Previous ? result.IncreaseCount + 1 : result.IncreaseCount,
