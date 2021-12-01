@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using AdventOfCode2021;
 
 #endregion
 

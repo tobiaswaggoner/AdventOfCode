@@ -4,10 +4,8 @@
 
 #region Using
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using AdventOfCode2021;
 
 #endregion
 
@@ -26,18 +24,18 @@ namespace AdventOfCode2019.Day1
         private static int CalculateResult(IReadOnlyList<int> input)
         {
             return input
-                .Select(i => (i / 3) - 2)
-                .Select(( fuel) => CalculateAdditionalFuel(fuel, fuel))
+                .Select(i => i / 3 - 2)
+                .Select(fuel => CalculateAdditionalFuel(fuel, fuel))
                 .Sum();
         }
 
         // Recursive
         private static int CalculateAdditionalFuel(int totalFuel, int additionalFuel)
         {
-            var moreFuel = (additionalFuel / 3) - 2;
+            var moreFuel = additionalFuel / 3 - 2;
             return moreFuel <= 0 ? totalFuel : CalculateAdditionalFuel(totalFuel + moreFuel, moreFuel);
-        }    
-        
+        }
+
         // Or iterative
         // private static int CalculateAdditionalFuel2(int totalFuel, int additionalFuel)
         // {

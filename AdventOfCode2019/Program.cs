@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 #endregion
 
-namespace AdventOfCode2021
+namespace AdventOfCode2019
 {
     public static class Program
     {

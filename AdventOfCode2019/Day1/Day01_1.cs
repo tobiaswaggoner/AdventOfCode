@@ -4,10 +4,8 @@
 
 #region Using
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using AdventOfCode2021;
 
 #endregion
 
@@ -25,7 +23,7 @@ namespace AdventOfCode2019.Day1
         private static int CalculateResult(IReadOnlyList<int> input)
         {
             return input
-                .Select(i => (i / 3) - 2)
+                .Select(i => i / 3 - 2)
                 .Sum();
         }
     }
