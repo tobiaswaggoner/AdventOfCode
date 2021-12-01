@@ -4,35 +4,25 @@
 
 #region Using
 
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.IO;
+using System.Reactive.Linq;
 
 #endregion
 
 namespace AdventOfCode2021.Day1
 {
-    public class Day01_1 : PuzzleBase
+    public class Day01_1 : IPuzzle
     {
-        protected override string RunPuzzle()
+        public void Run()
         {
-            var depths = ReadInputDataAsIntegerArray("Day1");
-            var increaseCount = CalculateIncreaseCount(depths);
-            return $"The measurement increased {increaseCount} times";
-        }
-
-        private static int CalculateIncreaseCount(IReadOnlyList<int> depths)
-        {
-            var increaseCount = depths
-                .Skip(1)
-                .Aggregate(
-                    new Summary(0, depths[0]),
-                    (result, next) => result with
-                    {
-                        IncreaseCount = next > result.Previous ? result.IncreaseCount + 1 : result.IncreaseCount,
-                        Previous = next
-                    }
-                ).IncreaseCount;
-            return increaseCount;
+            File.ReadAllLines(Path.Combine("Day1/PuzzleInput.txt"))
+                .ToObservable()
+                .Select(int.Parse)
+                .Buffer(2, 1) // Sliding Window
+                .Where(pair => pair.Count == 2 && pair[1] > pair[0])
+                .Count()
+                .Subscribe(result => Console.WriteLine("Day01_1: " + result));
         }
     }
 }

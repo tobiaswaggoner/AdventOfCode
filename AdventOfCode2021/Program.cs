@@ -19,10 +19,12 @@ namespace AdventOfCode2021
         public static void Main(string[] args)
         {
             WriteIntro();
+            
             if (args.Contains("-all") || !Debugger.IsAttached)
                 ExecuteAllPuzzles();
             else
                 ExecuteLatestPuzzle();
+
             WriteOutro();
         }
 
@@ -33,7 +35,7 @@ namespace AdventOfCode2021
             var puzzle = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => t.BaseType == typeof(PuzzleBase))
+                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
                 .OrderByDescending(t => t.Name)
                 .Take(1)
                 .Select(t => (IPuzzle)Activator.CreateInstance(t))
@@ -49,15 +51,17 @@ namespace AdventOfCode2021
             var allPuzzles = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => t.BaseType == typeof(PuzzleBase))
+                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
+                .OrderBy(t=>t.Name)
                 .Select(t => (IPuzzle)Activator.CreateInstance(t))
                 .ToList();
 
-            var allTasks = allPuzzles
-                .Select(puzzle => Task.Run(puzzle.Run))
-                .ToArray();
-
-            Task.WaitAll(allTasks);
+            allPuzzles.ForEach( puzzle =>
+            {
+                var start = DateTime.Now;
+                puzzle.Run();
+                Console.WriteLine($"    ... {DateTime.Now.Subtract(start).TotalMilliseconds:0}ms");
+            });
         }
 
         private static void WriteIntro()

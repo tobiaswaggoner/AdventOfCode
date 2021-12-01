@@ -4,45 +4,29 @@
 
 #region Using
 
-using System.Collections.Generic;
+using System;
+using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 
 #endregion
 
 namespace AdventOfCode2021.Day1
 {
-    public class Day01_2 : PuzzleBase
+    public class Day01_2 : IPuzzle
     {
-        protected override string RunPuzzle()
+        public void Run()
         {
-            var depths = ReadInputDataAsIntegerArray("Day1");
-            var increaseCount = CalculateIncreaseCount(depths);
-            return $"The measurement increased {increaseCount} times";
-        }
-
-        private static int CalculateIncreaseCount(IReadOnlyList<int> depths)
-        {
-            var slidingWindows = depths
-                .Select((next, index) =>
-                    next
-                    + (index == 0 ? 0 : depths[index - 1])
-                    + (index == depths.Count - 1 ? 0 : depths[index + 1])
-                )
-                .Skip(1)
-                .Take(depths.Count - 2)
-                .ToList();
-
-            var increaseCount = slidingWindows
-                .Skip(1)
-                .Aggregate(
-                    new Summary(0, slidingWindows[0]),
-                    (result, next) => result with
-                    {
-                        IncreaseCount = next > result.Previous ? result.IncreaseCount + 1 : result.IncreaseCount,
-                        Previous = next
-                    }
-                ).IncreaseCount;
-            return increaseCount;
+            File.ReadAllLines(Path.Combine("Day1/PuzzleInput.txt"))
+                .ToObservable()
+                .Select(int.Parse)
+                .Buffer(3, 1)
+                .Where(triple => triple.Count == 3)
+                .Select(triple => triple.Sum())
+                .Buffer(2, 1)
+                .Where(pair => pair.Count == 2 && pair[1] > pair[0])
+                .Count()
+                .Subscribe(result => Console.WriteLine("Day01_2: " + result));
         }
     }
 }
