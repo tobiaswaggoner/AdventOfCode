@@ -22,7 +22,7 @@ namespace AdventOfCode2021.Day1
                 .Buffer(2, 1) // Sliding Window
                 .Where(pair => pair.Count == 2 && pair[1] > pair[0])
                 .Count()
-                .Subscribe(result => Console.WriteLine("Day01_1: " + result));
+                .Subscribe(result => Console.WriteLine("Day 1/1: " + result));
         }
     }
 }

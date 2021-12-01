@@ -26,7 +26,7 @@ namespace AdventOfCode2021.Day1
                 .Buffer(2, 1)
                 .Where(pair => pair.Count == 2 && pair[1] > pair[0])
                 .Count()
-                .Subscribe(result => Console.WriteLine("Day01_2: " + result));
+                .Subscribe(result => Console.WriteLine("Day 1/2: " + result));
         }
     }
 }
