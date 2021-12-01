@@ -5,8 +5,6 @@
 #region Using
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 #endregion
 
@@ -21,7 +19,7 @@ namespace AdventOfCode2019.Day3
             return $"Result: {result}";
         }
 
-        private static int CalculateResult(List<string> input)
+        private static int CalculateResult(IReadOnlyList<string> input)
         {
             return CrossWireCalculator.DistanceToClosestCrossing(input[0], input[1]);
         }
