@@ -27,8 +27,6 @@ namespace AdventOfCode2020.Day2
                 {
                     min = int.Parse((string)pattern[0].Value),
                     max = int.Parse((string)pattern[1].Value),
-                    character = ((string)pattern[2].Value)[0],
-                    password = (string)pattern[3].Value,
                     charCount = ((string)pattern[3].Value).Count(c => c == ((string)pattern[2].Value)[0])
                 })
                 .Count(criteria =>
