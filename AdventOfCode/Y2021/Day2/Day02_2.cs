@@ -10,13 +10,13 @@ using System.Reactive.Linq;
 
 #endregion
 
-namespace AdventOfCode2021.Day2
+namespace AdventOfCode.Y2021.Day2
 {
     public class Day02_2 : IPuzzle
     {
         public void Run()
         {
-            File.ReadAllLines(Path.Combine("Day2", "PuzzleInput.txt"))
+            File.ReadAllLines(Path.Combine("Y2021", "Day2", "PuzzleInput.txt"))
                 .ToObservable()
                 .Select(cmd =>
                 {
@@ -39,11 +39,11 @@ namespace AdventOfCode2021.Day2
                         aim = pos.aim + cmd.direction switch
                         {
                             "down" => cmd.distance,
-                            "up" => - cmd.distance,
+                            "up" => -cmd.distance,
                             _ => 0
                         }
                     })
-                .Subscribe(result => Console.WriteLine($"Day 2/2: {result.depth * result.position}"));
+                .Subscribe(result => Console.WriteLine($"2021 - Day 2/2: {result.depth * result.position}"));
         }
     }
 }

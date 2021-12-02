@@ -7,17 +7,16 @@
 using System;
 using System.IO;
 using System.Reactive.Linq;
-using System.Runtime.InteropServices;
 
 #endregion
 
-namespace AdventOfCode2021.Day2
+namespace AdventOfCode.Y2021.Day2
 {
     public class Day02_1 : IPuzzle
     {
         public void Run()
         {
-            File.ReadAllLines(Path.Combine("Day2", "PuzzleInput.txt"))
+            File.ReadAllLines(Path.Combine("Y2021", "Day2", "PuzzleInput.txt"))
                 .ToObservable()
                 .Select(cmd =>
                 {
@@ -39,7 +38,7 @@ namespace AdventOfCode2021.Day2
                             _ => 0
                         }
                     })
-                .Subscribe(result => Console.WriteLine($"Day 2/1: {result.depth * result.position}"));
+                .Subscribe(result => Console.WriteLine($"2021 - Day 2/1: {result.depth * result.position}"));
         }
     }
 }

@@ -9,15 +9,15 @@ using System.IO;
 
 #endregion
 
-namespace AdventOfCode2019.Day3
+namespace AdventOfCode.Y2019.Day3
 {
     public class Day03_2 : IPuzzle
     {
         public void Run()
         {
-            var input = File.ReadAllLines(Path.Combine("Day3", "PuzzleInput.txt"));
+            var input = File.ReadAllLines(Path.Combine("Y2019", "Day3", "PuzzleInput.txt"));
             var result = CrossWireCalculator.FewestStepsToReachAnyCrossing(input[0], input[1]);
-            Console.WriteLine($"Day 3/1: {result}");
+            Console.WriteLine($"2019 - Day 3/2: {result}");
         }
     }
 }

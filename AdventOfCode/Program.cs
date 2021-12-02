@@ -8,55 +8,40 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 #endregion
 
-namespace AdventOfCode2021
+namespace AdventOfCode
 {
     public static class Program
     {
         public static void Main(string[] args)
         {
             WriteIntro();
-            
-            if (args.Contains("-all") || !Debugger.IsAttached)
-                ExecuteAllPuzzles();
-            else
-                ExecuteLatestPuzzle();
+
+            ExecuteAllPuzzles(2021);
 
             WriteOutro();
         }
 
-        private static void ExecuteLatestPuzzle()
-        {
-            Console.WriteLine("Running latest puzzle...");
-            
-            var puzzle = Assembly
-                .GetExecutingAssembly()
-                .GetTypes()
-                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
-                .OrderByDescending(t => t.Name)
-                .Take(1)
-                .Select(t => (IPuzzle)Activator.CreateInstance(t))
-                .FirstOrDefault();
-
-            puzzle?.Run();
-        }
-
-        private static void ExecuteAllPuzzles()
+        private static void ExecuteAllPuzzles(int? year = null, int? day=null, int? puzzleNo = null )
         {
             Console.WriteLine("Running all puzzles...");
 
             var allPuzzles = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
-                .OrderBy(t=>t.Name)
+                .Where(t => t.GetInterface(nameof(IPuzzle)) != null)
+                .Where(t=> 
+                    (year == null || t.Namespace!.Contains(year.ToString())) 
+                    && (day == null || t.Name.StartsWith($"Day{day:00}"))
+                    && (puzzleNo == null || t.Name.EndsWith($"_{puzzleNo:0}"))
+                    )
+                .OrderBy(t => t.FullName)
                 .Select(t => (IPuzzle)Activator.CreateInstance(t))
                 .ToList();
 
-            allPuzzles.ForEach( puzzle =>
+            allPuzzles.ForEach(puzzle =>
             {
                 var start = DateTime.Now;
                 puzzle.Run();
@@ -67,7 +52,7 @@ namespace AdventOfCode2021
         private static void WriteIntro()
         {
             Console.WriteLine("");
-            Console.WriteLine("Advent of code 2021");
+            Console.WriteLine("Advent of code");
             Console.WriteLine("");
             Console.WriteLine("-------------------");
         }
