@@ -13,7 +13,7 @@ using GrokNet;
 
 namespace AdventOfCode2020.Day2
 {
-    public class Day02_2 : IPuzzle
+    public class Day02_3 : IPuzzle
     {
         public void Run()
         {
