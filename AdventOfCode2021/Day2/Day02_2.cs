@@ -16,7 +16,7 @@ namespace AdventOfCode2021.Day2
     {
         public void Run()
         {
-            File.ReadAllLines(Path.Combine("Day2/PuzzleInput.txt"))
+            File.ReadAllLines(Path.Combine("Day2", "PuzzleInput.txt"))
                 .ToObservable()
                 .Select(cmd =>
                 {

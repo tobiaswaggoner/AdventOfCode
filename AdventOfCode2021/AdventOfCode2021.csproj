@@ -15,10 +15,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="grok.net" Version="1.0.1" />
       <PackageReference Include="System.Reactive" Version="5.0.0" />
+      <PackageReference Include="System.Reactive.Core" Version="5.0.0" />
       <PackageReference Include="System.Reactive.Interfaces" Version="5.0.0" />
       <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
       <PackageReference Include="System.Reactive.PlatformServices" Version="5.0.0" />
+      <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     </ItemGroup>
 
 </Project>

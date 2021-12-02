@@ -33,7 +33,7 @@ namespace AdventOfCode2020
             var puzzle = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => t.BaseType == typeof(PuzzleBase))
+                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
                 .OrderByDescending(t => t.Name)
                 .Take(1)
                 .Select(t => (IPuzzle)Activator.CreateInstance(t))
@@ -49,15 +49,17 @@ namespace AdventOfCode2020
             var allPuzzles = Assembly
                 .GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => t.BaseType == typeof(PuzzleBase))
+                .Where(t => t.GetInterface(nameof(IPuzzle))!=null)
+                .OrderBy(t => t.Name)
                 .Select(t => (IPuzzle)Activator.CreateInstance(t))
                 .ToList();
 
-            var allTasks = allPuzzles
-                .Select(puzzle => Task.Run(puzzle.Run))
-                .ToArray();
-
-            Task.WaitAll(allTasks);
+            allPuzzles.ForEach( puzzle =>
+            {
+                var start = DateTime.Now;
+                puzzle.Run();
+                Console.WriteLine($"    ... {DateTime.Now.Subtract(start).TotalMilliseconds:0}ms");
+            });
         }
 
         private static void WriteIntro()

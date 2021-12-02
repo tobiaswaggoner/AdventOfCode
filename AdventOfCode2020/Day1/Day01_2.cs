@@ -4,28 +4,28 @@
 
 #region Using
 
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.IO;
+using System.Reactive.Linq;
 
 #endregion
 
 namespace AdventOfCode2020.Day1
 {
-    public class Day01_2 : PuzzleBase
+    public class Day01_2 : IPuzzle
     {
-        protected override string RunPuzzle()
+        // 85491920
+        public void Run()
         {
-            var input = ReadInputDataAsIntegerArray("Day1");
-            var result = CalculateResult(input);
-            return $"Result: {result}";
-        }
-
-        private static int CalculateResult(IReadOnlyList<int> input)
-        {
-            return input
-                .SelectMany(a => input.SelectMany(b => input.Select( c => new { a, b, c, sum = a + b + c, product = a * b * c })))
-                .First(result => result.sum == 2020)
-                .product;
+            var input = File.ReadAllLines(Path.Combine("Day1", "PuzzleInput.txt"))
+                .ToObservable()
+                .Select(int.Parse);
+            input
+                .SelectMany(a =>
+                    input.SelectMany(b => input.Select(c => new { a, b, c, sum = a + b + c, product = a * b * c })))
+                .Where(result => result.sum == 2020)
+                .Take(1)
+                .Subscribe(result => Console.WriteLine("Day 1/1: " + result.product));
         }
     }
 }
