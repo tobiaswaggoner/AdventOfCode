@@ -39,6 +39,9 @@
         <None Update="Y2019\Day3\PuzzleInput.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="Y2021\Day3\PuzzleInput.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -49,10 +52,6 @@
         <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
         <PackageReference Include="System.Reactive.PlatformServices" Version="5.0.0" />
         <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Y2021" />
     </ItemGroup>
 
 </Project>
