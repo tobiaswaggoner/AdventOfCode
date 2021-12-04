@@ -19,7 +19,7 @@ namespace AdventOfCode
         {
             WriteIntro();
 
-            ExecuteAllPuzzles(2021, 3, 2);
+            ExecuteAllPuzzles(2021, 4);
 
             WriteOutro();
         }
