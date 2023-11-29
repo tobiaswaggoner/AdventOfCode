@@ -25,7 +25,7 @@ namespace AdventOfCode.Y2021.Day4
             
             var initialState = new State(
                 input.ReadToEnd()
-                    .Split("\r\n\r\n", StringSplitOptions.TrimEntries)
+                    .Split(Environment.NewLine + Environment.NewLine, StringSplitOptions.TrimEntries)
                     .Select(ReadBoard)
                     .Select(InitializeColumns)
                     .ToImmutableList(), -1, -1);
@@ -42,7 +42,7 @@ namespace AdventOfCode.Y2021.Day4
 
         private static Board ReadBoard(string boardData)
         {
-            return new Board(boardData.Split("\r\n", StringSplitOptions.TrimEntries)
+            return new Board(boardData.Split(Environment.NewLine, StringSplitOptions.TrimEntries)
                 .Select(row => row
                     .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
