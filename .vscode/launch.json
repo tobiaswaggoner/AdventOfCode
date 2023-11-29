@@ -8,7 +8,10 @@
             "name": "C#: AdventOfCode Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/AdventOfCode/AdventOfCode.csproj"
+            "projectPath": "${workspaceFolder}/AdventOfCode/AdventOfCode.csproj",
+            "logging": {
+                "moduleLoad": false
+            },
         }
 
     ]
